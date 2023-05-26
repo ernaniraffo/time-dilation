@@ -1,20 +1,23 @@
 from scipy import constants
 from math import sqrt
+from planets import Planet, MassiveObject
 
-def time_dilation(t: float, r: float, M: float) -> float:
+
+def time_dilation(t: float, planet: Planet, massive_body: MassiveObject) -> float:
     """
     ∆t' = ∆t • sqrt(1 - (2MG / r • c^2))
     """
     G = constants.G
     c = constants.c
-    t_prime = t * sqrt(1 - ((2 * M * G) / (r * c**2)))
+    t_prime = t * sqrt(1 - ((2 * massive_body.mass * G) / (planet.r * c**2)))
     return t_prime
 
+
 def main():
-    t = 86400
-    r = 0.387 * constants.au
-    M = 4.385 * 10**30 * constants.lb
-    print(time_dilation(t, r, M))
+    earth = Planet("Earth", 1 * constants.au)
+    sun = MassiveObject("Sun", 4.385 * 10**30 * constants.lb)
+    print(time_dilation(86400, earth, sun))
+
 
 if __name__ == "__main__":
     main()
