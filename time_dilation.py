@@ -14,9 +14,23 @@ def time_dilation(t: float, planet: Planet, massive_body: MassiveObject) -> floa
 
 
 def main():
-    earth = Planet("Earth", 1 * constants.au)
-    sun = MassiveObject("Sun", 4.385 * 10**30 * constants.lb)
-    print(time_dilation(86400, earth, sun))
+    # earth = Planet("Earth", 1 * constants.au)
+    sun = MassiveObject("Sun", 2 * 10**30)
+
+    gargantua = MassiveObject("Gargantua", sun.mass * 100000000)
+    print("Mass of %s = %d kg" % (sun.name, sun.mass))
+    print("Mass of %s = %d kg" % (gargantua.name, gargantua.mass))
+
+    # figure out distance between Miller and Gargantua
+    r = (2 * constants.G * gargantua.mass / constants.c**2)
+    miller_time = 0
+    while miller_time < constants.hour:
+        miller = Planet("Miller", r)
+        miller_time = time_dilation(constants.year * 7, miller, gargantua)
+        r += 1
+
+    print(miller)
+    print("7 years on Earth is", miller_time / 60 / 60, "hours on Miller's planet")
 
 
 if __name__ == "__main__":
