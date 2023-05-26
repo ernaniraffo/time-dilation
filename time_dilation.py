@@ -2,7 +2,6 @@ from scipy import constants
 from math import sqrt
 from planets import Planet, MassiveObject
 
-
 def time_dilation(t: float, planet: Planet, massive_body: MassiveObject) -> float:
     """
     ∆t' = ∆t • sqrt(1 - (2MG / r • c^2))
@@ -14,12 +13,10 @@ def time_dilation(t: float, planet: Planet, massive_body: MassiveObject) -> floa
 
 
 def main():
-    # earth = Planet("Earth", 1 * constants.au)
+    earth = Planet("Earth", 1 * constants.au)
     sun = MassiveObject("Sun", 2 * 10**30)
 
     gargantua = MassiveObject("Gargantua", sun.mass * 100000000)
-    print("Mass of %s = %d kg" % (sun.name, sun.mass))
-    print("Mass of %s = %d kg" % (gargantua.name, gargantua.mass))
 
     # figure out distance between Miller and Gargantua
     r = (2 * constants.G * gargantua.mass / constants.c**2)
@@ -29,6 +26,9 @@ def main():
         miller_time = time_dilation(constants.year * 7, miller, gargantua)
         r += 1
 
+    print(earth)
+    print(sun)
+    print(gargantua)
     print(miller)
     print("7 years on Earth is", miller_time / 60 / 60, "hours on Miller's planet")
 
