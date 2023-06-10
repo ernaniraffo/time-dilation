@@ -1,23 +1,42 @@
 from scipy import constants
 
-distance_to_sun = {"Earth": 1, "Mercury": 0.39, "Venus": 0.72, "Mars": 1.52, "Jupiter": 5.2, "Saturn": 9.54, "Uranus": 19.2, "Neptune": 30.06}
-
 solar_mass = 2 * 10**30
 
 
 class Planet():
     def __init__(self, name: str, r: int | float):
         self.name = name
-        self.r = r
+        self.r = r * constants.au
 
     def __str__(self):
-        return "name: " + self.name + ", r: " + str(self.r / constants.au) + " AU"
+        return "name: " + self.name + "\tr: " + str(self.r / constants.au) + " AU"
 
 
 class MassiveObject():
     def __init__(self, name: str, mass: int | float):
         self.name = name
-        self.mass = mass
+        self.mass = mass * solar_mass
 
     def __str__(self) -> str:
-        return "name: " + self.name + ", solar mass: " + str(self.mass / solar_mass)
+        return "name: " + self.name + "\tsolar mass: " + str(self.mass / solar_mass)
+
+
+class System():
+    def __init__(self) -> None:
+        self.planets = {}
+        self.massive_object = None
+
+    def add_planet(self, planet: Planet):
+        self.planets[planet.name] = planet
+
+    def add_massive_object(self, object: MassiveObject):
+        self.massive_object = object
+
+    def __str__(self) -> str:
+        s = "Massive Object:\n\t" + str(self.massive_object) + "\n"
+        s += "Planets:\n"
+        for i, p in enumerate(self.planets.values()):
+            s += "\t" + str(p)
+            if i + 1 < len(self.planets):
+                s += "\n"
+        return s
