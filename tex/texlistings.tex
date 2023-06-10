@@ -1,0 +1,126 @@
+
+\lstdefinestyle{c}{
+  language=c,
+  backgroundcolor=\color{white},
+  commentstyle=\color{Green},
+  keywordstyle=\color{blue},
+  keywordstyle=[2]\color{magenta},
+  numberstyle=\ttfamily\color{gray},
+  stringstyle=\color{BrickRed},
+  basicstyle=\ttfamily\footnotesize\color{black},
+  breakatwhitespace=false,       
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=7pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  xleftmargin=10pt,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\newtcblisting{clisting}[2][]{
+  title=#2, #1,
+  fonttitle=\footnotesize\bfseries,
+  colframe=black!75,
+  colback=white!90,
+  listing only,
+  listing options={style=c},
+  top=-5pt,
+  bottom=-5pt,
+  enlarge top by=5pt
+}
+
+\lstdefinestyle{python}{
+  language=python,
+  backgroundcolor=\color{white},
+  commentstyle=\color{Green},
+  keywordstyle=\color{blue},
+  keywordstyle=[2]\color{magenta},
+  morekeywords={as, None, True, False, self},
+  numberstyle=\ttfamily\color{gray},
+  stringstyle=\color{BrickRed},
+  basicstyle=\ttfamily\footnotesize\color{black},
+  breakatwhitespace=false,
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,
+  mathescape=true,
+  numbersep=7pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  xleftmargin=10pt,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\newtcblisting{pylisting}[2][]{
+  title=#2, #1,
+  fonttitle=\footnotesize\bfseries,
+  colframe=black!75,
+  colback=white,
+  listing only,
+  listing options={style=python},
+  top=-5pt,
+  bottom=-5pt,
+  enlarge top by=5pt
+}
+
+\lstdefinestyle{bash}{
+    language=bash,
+    basicstyle=\ttfamily\footnotesize\color{black},
+    breakatwhitespace=false,
+    mathescape=true,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    xleftmargin=-7pt,
+    showtabs=false,
+    tabsize=2
+}
+
+\newtcblisting{bashlisting}[1]{
+    title=#1,
+    fonttitle=\footnotesize\bfseries,
+    colframe=black!75,
+    colback=white,
+    listing only,
+    listing options={style=bash},
+    top=-5pt,
+    bottom=-5pt,
+    enlarge top by=5pt
+}
+
+\lstdefinestyle{llvm}{
+    language=LLVM,
+    basicstyle=\ttfamily\footnotesize\color{black},
+    keywordstyle=\color{blue},
+    keywordstyle=[2]\color{magenta},
+    breakatwhitespace=false,
+    mathescape=true,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    xleftmargin=-7pt,
+    showtabs=false,
+    tabsize=2
+}
+
+\newtcblisting{llvmlisting}[1]{
+    title=#1,
+    fonttitle=\footnotesize\bfseries,
+    colframe=black!75,
+    colback=white,
+    listing only,
+    listing options={style=llvm},
+    top=-5pt,
+    bottom=-5pt,
+    enlarge top by=5pt
+}
