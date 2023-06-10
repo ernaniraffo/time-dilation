@@ -1,6 +1,8 @@
 from scipy import constants
 from math import sqrt
-from planets import Planet, MassiveObject
+from planets import Planet, MassiveObject, System
+import argparse
+
 
 def time_dilation(t: float, planet: Planet, massive_body: MassiveObject) -> float:
     """
@@ -12,26 +14,44 @@ def time_dilation(t: float, planet: Planet, massive_body: MassiveObject) -> floa
     return t_prime
 
 
+def get_system(file: str) -> System:
+    system = System()
+    with open(file, "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            line = line.strip("\n")
+            name, num = line.split()
+            if not system.massive_object:
+                system.add_massive_object(MassiveObject(name, float(num)))
+            else:
+                system.add_planet(Planet(name, float(num)))
+    return system
+
+
 def main():
-    earth = Planet("Earth", 1 * constants.au)
-    sun = MassiveObject("Sun", 2 * 10**30)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--file", "-f", type=str)
+    args = parser.parse_args()
 
-    gargantua = MassiveObject("Gargantua", sun.mass * 100000000)
+    star_system = get_system(args.file)
+    print(star_system)
 
-    # figure out distance between Miller and Gargantua
-    r = (2 * constants.G * gargantua.mass / constants.c**2)
-    miller_time = 0
-    while miller_time < constants.hour:
-        miller = Planet("Miller", r)
-        miller_time = time_dilation(constants.year * 7, miller, gargantua)
-        r += 1
-
-    print(earth)
-    print(sun)
-    print(gargantua)
-    print(miller)
-    print("7 years on Earth is", miller_time / 60 / 60, "hours on Miller's planet")
-
+    while True:
+        try:
+            print("\nEnter two planets to calculate time dilation difference:")
+            p1 = None
+            while p1 not in star_system.planets:
+                p1 = input("Planet 1: ")
+            p2 = None
+            while  p2 not in star_system.planets:
+                p2 = input("Planet 2: ")
+            time = float(input("Enter time observed in seconds: "))
+            print(f"Time on {p1}: {(t1 := time_dilation(time, star_system.planets[p1], star_system.massive_object))}")
+            print(f"Time on {p2}: {(t2 := time_dilation(time, star_system.planets[p2], star_system.massive_object))}")
+            print(f"Time difference: {(t2 - t1 if t2 > t1 else t1 - t2)}")
+            print("\nPress ctrl-c to exit")
+        except KeyboardInterrupt:
+            exit(0)
 
 if __name__ == "__main__":
     main()
